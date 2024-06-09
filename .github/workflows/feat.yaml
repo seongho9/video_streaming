@@ -3,7 +3,7 @@ name: Restrict Feat Branch Merges
 on:
   pull_request:
     branches:
-      - '*-feat'
+      - '*-feat/*'
 
 jobs:
   restrict-merge:
