@@ -1,0 +1,17 @@
+name: Restrict Feat Branch Merges
+
+on:
+  pull_request:
+    branches:
+      - '*-feat'
+
+jobs:
+  restrict-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check target branch
+        if: github.event.pull_request.base.ref != 'refs/heads/*-dev'
+        run: |
+          echo "You can only merge '*-feat' branches into '*-dev' branches."
+          exit 1
