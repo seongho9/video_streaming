@@ -1,5 +1,5 @@
-
-
+#visual studio setting files
+/Media_Engine/.vs/
 #boost lib
 /Media_Engine/boost_1_84_0/
 
