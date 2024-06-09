@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: Check target branch
-        if: github.event.pull_request.base.ref != 'refs/heads/*-dev'
         run: |
-          echo "You can only merge '*-feat' branches into '*-dev' branches."
-          exit 1
+          TARGET_BRANCH=${{ github.event.pull_request.base.ref }}
+          if [[ ! "$TARGET_BRANCH" =~ ^.*-dev$ ]]; then
+            echo "You can only merge '*-feat' branches into '*-dev' branches."
+            exit 1
+          fi
