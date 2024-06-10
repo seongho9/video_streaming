@@ -1,20 +1,16 @@
 from django.db import models
-from django.shortcuts import reverse
 
 
 class Room(models.Model):
-    room_id = models.CharField(max_length=128)
+    room_id = models.IntegerField()
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
-    streamer_id = models.CharField(max_length=20)
+    streamer_id = models.CharField(max_length=36)
     tag = models.CharField(max_length=8)
 
     class Meta:
         ordering = ["-room_id"]
-
-    def get_absolute_url(self):
-        return reverse("streaming:room_detail", kwargs={"pk": self.pk})
 
 
 class Video(models.Model):

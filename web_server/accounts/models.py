@@ -1,8 +1,12 @@
-from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+import uuid
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=6)
+class User(AbstractUser):
+    id = models.CharField(
+        primary_key=True, default=uuid.uuid4, editable=False, max_length=32
+    )
+
+    class Meta:
+        db_table = "user"
