@@ -94,9 +94,11 @@ namespace media_engine
 			Attribute(Attribute& rhs);
 			Attribute(Attribute&& rhs);
 
+			~Attribute();
+
 			std::string to_string();
 
-			void set_type(const std::string& key);
+			void set_type(const std::string& type);
 			void set_value(const std::string& value);
 
 			std::string& get_type();
