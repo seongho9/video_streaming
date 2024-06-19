@@ -11,7 +11,7 @@ link_directories(${BOOST_LIBRARY_DIR})
 
 add_subdirectory("./src")
 
-add_executable (Media_Engine "Media_Engine.cpp" "Media_Engine.hpp")
+add_executable (Media_Engine "Media_Engine.cpp" "Media_Engine.hpp" "src/ICE/SDP.cpp")
 target_link_libraries(${PROJECT_NAME} ${BOOST_LIBRARIES} WebSocket)
 
 message("lo")
