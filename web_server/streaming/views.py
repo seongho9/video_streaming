@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -48,3 +49,14 @@ class VideoViewSet(ModelViewSet):
 
         serializer = self.get_serializer(video)
         return Response(serializer.data)
+
+
+def test(request, room_id, user_id):
+    return render(
+        request,
+        "streaming/test.html",
+        {
+            "room_id": room_id,
+            "user_id": user_id,
+        },
+    )

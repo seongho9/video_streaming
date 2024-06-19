@@ -8,16 +8,29 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 with open("secrets.json") as f:
     secret_data = json.load(f)
 SECRET_KEY = secret_data["SECRET_KEY"]
+password = secret_data["PASSWORD"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Redis Caches
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": password,
+        },
+    }
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -26,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts",
     "streaming",
+    "channels",
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
 ]
@@ -75,6 +89,17 @@ TEMPLATES = [
         },
     },
 ]
+
+ASGI_APPLICATION = "web_server.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [f"redis://:{password}@127.0.0.1:6379/0"],
+        },
+    },
+}
 
 WSGI_APPLICATION = "web_server.wsgi.application"
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Test</title>
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      #viewerCountText {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      button {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebSocket Test</h1>
+    <button onclick="connectWebSocket()">Connect WebSocket</button>
+    <button onclick="sendWebSocketMessage()">Send Message</button>
+    <div class="container">
+      <span id="viewerCountText">현재 시청자수: </span>
+      <div id="messageContainer"></div>
+    </div>
+    <script>
+      let socket;
+
+      function connectWebSocket() {
+        const room_id = "{{ room_id }}"; // 방 번호
+        const user_id = "{{ user_id }}"; // 사용자 ID
+        // WebSocket 연결
+        socket = new WebSocket(
+          `ws://localhost:8000/ws/room/${room_id}/${user_id}/`
+        );
+
+        // 연결이 열렸을 때 호출되는 이벤트 핸들러
+        socket.onopen = function (event) {
+          console.log("WebSocket 연결이 열렸습니다.");
+        };
+
+        // 메시지를 수신했을 때 호출되는 이벤트 핸들러
+        socket.onmessage = function (event) {
+          console.log("서버로부터 메시지를 수신했습니다:", event.data);
+          displayLatestMessage(JSON.parse(event.data).viewer_count);
+        };
+
+        // 연결이 닫혔을 때 호출되는 이벤트 핸들러
+        socket.onclose = function (event) {
+          console.log("WebSocket 연결이 닫혔습니다.");
+        };
+
+        // 에러가 발생했을 때 호출되는 이벤트 핸들러
+        socket.onerror = function (error) {
+          console.error("WebSocket 에러 발생:", error);
+        };
+      }
+
+      function sendWebSocketMessage() {
+        if (!socket || socket.readyState !== WebSocket.OPEN) {
+          console.error("WebSocket 연결이 열리지 않았습니다.");
+          return;
+        }
+
+        // 서버로 메시지 전송
+        socket.send("Hello, WebSocket!");
+      }
+      function displayLatestMessage(message) {
+        const messageContainer = document.getElementById("messageContainer");
+        messageContainer.innerHTML = "";
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        messageContainer.appendChild(messageElement);
+      }
+    </script>
+  </body>
+</html>
