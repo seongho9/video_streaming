@@ -4,6 +4,80 @@ using namespace media_engine::ICE;
 //constructor
 Media::Media()
 {
+<<<<<<< HEAD
+	_media = "";
+	_port = {};
+	_protocol = Protocol::NONE;
+	_format = {};
+	_attribute = {};
+}
+Media::Media(Media& rhs)
+{
+	set_media(rhs.get_media());
+	set_port(rhs.get_port());
+	set_protocol(rhs.get_protocol());
+	set_format(rhs.get_format());
+	set_attribute(rhs.get_attribute());
+}
+//getter
+const std::string& Media::get_media() const
+{
+	return _media;
+}
+const std::vector<int>& Media::get_port() const
+{
+	return _port;
+}
+const Protocol& Media::get_protocol() const
+{
+	return _protocol;
+}
+const std::vector<int>& Media::get_format() const
+{
+	return _format;
+}
+const std::vector<Attribute>& Media::get_attribute() const
+{
+	return _attribute;
+}
+
+//setter
+void Media::set_media(const std::string& param)
+{
+	_media = param;
+}
+
+void Media::add_port(const int& param)
+{
+	_port.push_back(param);
+}
+void Media::set_port(const std::vector<int>& param)
+{
+	_port = param;
+}
+
+void Media::set_protocol(const Protocol& param)
+{
+	_protocol = param;
+}
+
+void Media::add_format(const int& param)
+{
+	_format.push_back(param);
+}
+void Media::set_format(const std::vector<int>& param)
+{
+	_format = param;
+}
+
+void Media::add_attribute(const Attribute& param)
+{
+	_attribute.push_back(param);
+}
+void Media::set_attribute(const std::vector<Attribute>& param)
+{
+	_attribute = param;
+=======
 	this->_media = nullptr;
 	this->_port = nullptr;
 	this->_protocol = nullptr;
@@ -72,15 +146,15 @@ Media::~Media()
 	}
 }
 //getter
-std::string& Media::get_media() const
+std::string Media::get_media() const
 {
 	if (this->_media == nullptr) {
-		return;
+		return "";
 	}
 
-	return *_media;
+	return *(this->_media);
 }
-std::vector<int>& Media::get_port() const
+std::vector<int> Media::get_port() const
 {
 	if (_port == nullptr) {
 		return;
@@ -88,7 +162,7 @@ std::vector<int>& Media::get_port() const
 
 	return *(this->_port);
 }
-Protocol& Media::get_protocol() const
+Protocol Media::get_protocol() const
 {
 	if (_protocol == nullptr) {
 		return;
@@ -96,7 +170,7 @@ Protocol& Media::get_protocol() const
 
 	return *(this->_protocol);
 }
-std::vector<int>& Media::get_format() const
+std::vector<int> Media::get_format() const
 {
 	if (_format == nullptr) {
 		return;
@@ -104,7 +178,7 @@ std::vector<int>& Media::get_format() const
 
 	return *(this->_format);
 }
-std::vector<Attribute>& Media::get_attribute() const
+std::vector<Attribute> Media::get_attribute() const
 {
 	if (_attribute == nullptr) {
 		return;
@@ -230,6 +304,7 @@ void Media::set_attribute(const std::vector<Attribute>& attri)
 	}
 
 	*_attribute = attri;
+>>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 }
 
 //to_string
@@ -237,15 +312,26 @@ std::string Media::to_string()
 {
 	std::stringstream stream;
 	//media
+<<<<<<< HEAD
+	stream << _media << " ";
+	//port
+	stream << _port.at(0);
+	if (1 < _port.size()) {
+=======
 	stream << this->get_media() << " ";
 	//port
 	stream << this->get_port()[0];
 	if (this->_port->size() > 1) {
+>>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 		stream << "/" << this->get_port().size();
 	}
 	stream << " ";
 	//proto
+<<<<<<< HEAD
+	Protocol proto = _protocol;
+=======
 	Protocol proto = this->get_protocol();
+>>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 	if (proto == Protocol::RTP_AVP) {
 		stream << "RTP/AVP ";
 	}
@@ -253,11 +339,19 @@ std::string Media::to_string()
 		stream << "RTP/SAVP ";
 	}
 	else if (proto == Protocol::UDP) {
+<<<<<<< HEAD
+		stream << "UDP ";
+	}
+	//fmt
+	for (int num : _port) {
+		stream << num << " ";
+=======
 		stream << "UDP";
 	}
 	//fmt
 	for (int number : this->get_format()) {
 		stream << number << " ";
+>>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 	}
 
 	return stream.str();
