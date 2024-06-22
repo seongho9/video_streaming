@@ -68,7 +68,6 @@ namespace media_engine
 		private:
 			short _version;
 			Origin _origin;
->>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 			std::string _session_name;
 			std::string _information;
 			std::string _uri;
@@ -135,30 +134,16 @@ namespace media_engine
 		{
 		public:
 			Attribute();
-<<<<<<< HEAD
-=======
 			Attribute(std::string param);
->>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 			Attribute(Attribute& rhs);
 
 			std::string to_string();
 
-<<<<<<< HEAD
-			void set_type(const std::string& param);
-			void set_value(const std::string& param);
-
-			std::string& get_type();
-			std::string& get_value();
-
-		private:
-			std::string _type;
-=======
 			void set_key(std::string key);
 			void set_value(std::string value);
 
 		private:
 			std::string _key;
->>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 			std::string _value;
 		};
 
@@ -166,42 +151,6 @@ namespace media_engine
 		{
 		public:
 			Media();
-<<<<<<< HEAD
-			Media(Media& rhs);
-
-			std::string to_string();
-
-			void set_media(const std::string& param);
-
-			void add_port(const int& param);
-			void set_port(const std::vector<int>& param);
-
-			void set_protocol(const Protocol& param);
-
-			void add_format(const int& param);
-			void set_format(const std::vector<int>& param);
-
-			void add_attribute(const Attribute& param);
-			void set_attribute(const std::vector<Attribute>& param);
-
-			const std::string& get_media() const;
-			const std::vector<int>& get_port() const;
-			const Protocol& get_protocol()	const;
-			const std::vector<int>& get_format() const;
-			const std::vector<Attribute>& get_attribute() const;
-
-		private:
-			//	type of media( audio, video, etc )
-			std::string _media;
-			//	port number send or receive ( get at least one port)
-			std::vector<int> _port;
-			//	transport protocol
-			Protocol _protocol;
-			//	media format( mapped to attribute )
-			std::vector<int> _format;
-			//	mapping attribute
-			std::vector<Attribute> _attribute;
-=======
 			Media(std::string param);
 			Media(Media& rhs);
 			Media(Media&& rhs);
@@ -241,7 +190,6 @@ namespace media_engine
 			std::vector<int> *_format;
 			//	mapping attribute
 			std::vector<Attribute> *_attribute;
->>>>>>> 72c6f86936713c3ea993536c55720164bf052747
 
 		};
 	}
