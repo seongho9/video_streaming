@@ -21,8 +21,6 @@ namespace media_engine
 			~SDP();
 
 			std::string to_string();
-
-<<<<<<< HEAD
 			void set_version(const short& version);
 
 			void set_origin(Origin* origin);
@@ -50,24 +48,9 @@ namespace media_engine
 			std::vector<Media> get_media() const;
 			std::vector<Attribute> get_attribute() const;
 
-			
-
 		private:
 			short _version;
 			Origin *_origin;
-=======
-			void set_version(short version);
-			void set_origin(Origin origin);
-			void set_session_name(std::string session_name);
-			void set_information(std::string info);
-			void set_uri(std::string uri);
-			void set_phone(std::string phone);
-			int set_media(Media media);
-			int set_attribute(Attribute attribute);
-
-		private:
-			short _version;
-			Origin _origin;
 			std::string _session_name;
 			std::string _information;
 			std::string _uri;
@@ -151,26 +134,21 @@ namespace media_engine
 		{
 		public:
 			Media();
-			Media(std::string param);
 			Media(Media& rhs);
-			Media(Media&& rhs);
 
 			std::string to_string();
 
 			void set_media(const std::string& media);
 
-			void set_port(const int& port);
-			void set_port(const std::string& port);
+			void add_port(const int& param);
 			void set_port(const std::vector<int>& ports);
 
 			void set_protocol(const Protocol& proto);
-			void set_protocol(const std::string& proto);
 
-			void set_format(const int& format);
-			void set_format(const std::string& format);
-			void set_format(const std::vector<int>& formats);
+			void add_format(const int& param);
+			void set_format(const std::vector<int>& param);
 
-			void set_attribute(const Attribute& attri);
+			void add_attribute(const Attribute& attri);
 			void set_attribute(const std::vector<Attribute>& attri);
 
 			std::string get_media() const;
@@ -181,16 +159,15 @@ namespace media_engine
 
 		private:
 			//	type of media( audio, video, etc )
-			std::string *_media;
+			std::string _media;
 			//	port number send or receive ( get at least one port)
-			std::vector<int> *_port;
+			std::vector<int> _port;
 			//	transport protocol
-			Protocol *_protocol;
+			Protocol _protocol;
 			//	media format( protocol number is predefined )
-			std::vector<int> *_format;
+			std::vector<int> _format;
 			//	mapping attribute
-			std::vector<Attribute> *_attribute;
-
+			std::vector<Attribute> _attribute;
 		};
 	}
 }
