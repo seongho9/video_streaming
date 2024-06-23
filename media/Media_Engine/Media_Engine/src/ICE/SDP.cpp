@@ -32,6 +32,26 @@ SDP::~SDP()
 	}
 }
 
+std::string SDP::to_string()
+{
+	std::stringstream stream;
+	
+	stream << "v=" << _version << "\n";
+	stream << "o=" << _origin->to_string() << "\n";
+	stream << "s=" << _session_name << "\n";
+	stream << "c=" << _origin->get_network_type() << " " << _origin->get_address_type() << " " << "\n";
+	stream << "t=" << "0 0\n";
+
+	for (Media media : _media) {
+		stream << "m=" << media.to_string();
+		for (Attribute attri : media.get_attribute()) {
+			stream << "a=" << attri.to_string();
+		}
+	}
+	
+	return stream.str();
+}
+
 void SDP::set_version(const short& version)
 {
 	_version = version;
@@ -61,6 +81,7 @@ void SDP::set_phone(const std::string& phone)
 }
 void SDP::set_media(const std::vector<Media>& param)
 {
+	
 	_media = param;
 }
 void SDP::add_media(const Media& param)
