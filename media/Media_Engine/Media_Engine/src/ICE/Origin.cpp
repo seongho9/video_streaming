@@ -10,8 +10,8 @@ Origin::Origin()
 	_session_ver = "";
 	_address = "";
 
-	_network_type = Network_Type::INTERNET;
-	_address_type = Address_Type::IPV4;
+	_network_type = Network_Type::NONE;
+	_address_type = Address_Type::NONE;
 
 	_address = "";
 }
@@ -25,32 +25,32 @@ Origin::Origin(Origin& rhs)
 	set_address(rhs.get_address());
 }
 
-std::string& Origin::get_username()
+std::string Origin::get_username() const
 {
 	return _username;
 }
 
-std::string& Origin::get_session_ver()
+std::string Origin::get_session_ver() const
 {
 	return _session_ver;
 }
 
-std::string& Origin::get_session_id()
+std::string Origin::get_session_id() const
 {
 	return _session_id;
 }
 
-Network_Type& Origin::get_network_type()
+Network_Type Origin::get_network_type() const
 {
 	return _network_type;
 }
 
-Address_Type& Origin::get_address_type()
+Address_Type Origin::get_address_type() const
 {
 	return _address_type;
 }
 
-std::string& Origin::get_address()
+std::string Origin::get_address() const
 {
 	return _address;
 }
@@ -89,16 +89,16 @@ std::string Origin::to_string()
 {
 	std::stringstream stream;
 
-	stream << _username << " " << _session_id << " " << _session_ver << " ";
+	stream << _username << " " << _session_id << " " << _session_ver;
 	if (_network_type == Network_Type::INTERNET) {
-		stream << "IN ";
+		stream << " IN";
 	}
 
 	if (_address_type == Address_Type::IPV4) {
-		stream << "IP4 ";
+		stream << " IP4";
 	}
 	else if (_address_type == Address_Type::IPV6) {
-		stream << "IP6 ";
+		stream << " IP6";
 	}
 
 	stream << _address;
