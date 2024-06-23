@@ -26,11 +26,11 @@ void Attribute::set_value(const std::string& param)
 }
 
 //getter
-std::string& Attribute::get_type()
+std::string Attribute::get_type() const
 {
 	return _type;
 }
-std::string& Attribute::get_value()
+std::string Attribute::get_value() const
 {
 	return _value;
 }
